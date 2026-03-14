@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Awaaz India — Voice of Every Citizen</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi&family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Your CSS file -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ── NAVBAR ─────────────────────────────── -->
+<nav>
+  <div class="logo">
+    <div class="logo-icon">☸</div>
+    <div>
+      <div class="logo-text">Awaaz India</div>
+      <div class="logo-sub">आवाज़ इंडिया</div>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#news">Live News</a></li>
+    <li><a href="#suggest">Suggest</a></li>
+    <li><a href="#trending">Trending</a></li>
+  </ul>
+  <div class="nav-cta">
+    <button class="btn btn-outline" onclick="openModal('login')">Login</button>
+    <button class="btn btn-primary" onclick="openModal('signup')">Join Free</button>
+  </div>
+</nav>
+
+<!-- ── HERO ───────────────────────────────── -->
+<div class="hero">
+  <div class="hero-badge">🇮🇳 For Every Indian Citizen</div>
+  <h1>
+    <span class="saffron">AWAAZ</span><br>
+    <span style="color:var(--white);">INDIA</span>
+  </h1>
+  <div class="hero-hindi">आपकी आवाज़, आपकी सरकार</div>
+  <p>India's first citizen-powered platform. Share your ideas with the government, stay updated with live news, and vote on issues that matter to you.</p>
+  <div class="hero-btns">
+    <button class="btn btn-primary btn-large" onclick="openModal('signup')">🎙️ Raise Your Awaaz</button>
+    <button class="btn btn-green btn-large" onclick="scrollTo('news')">📰 Live News</button>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">2.4L+</div>
+      <div class="stat-label">Citizens</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">18K+</div>
+      <div class="stat-label">Suggestions</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">28</div>
+      <div class="stat-label">States</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Free</div>
+    </div>
+  </div>
+</div>
+
+<div class="tricolor"></div>
+
+<!-- ── LIVE NEWS ──────────────────────────── -->
+<section id="news">
+  <div class="section-title">LIVE <span style="color:var(--saffron);">NEWS</span></div>
+  <div class="section-sub">Real-time news from India's top sources</div>
+
+  <!-- Category Tabs -->
+  <div style="display:flex;gap:10px;margin-bottom:28px;flex-wrap:wrap;">
+    <button class="news-tab-btn active" onclick="loadNews('india', this)">🇮🇳 India</button>
+    <button class="news-tab-btn" onclick="loadNews('politics', this)">🏛️ Politics</button>
+    <button class="news-tab-btn" onclick="loadNews('economy', this)">📈 Economy</button>
+    <button class="news-tab-btn" onclick="loadNews('technology', this)">💻 Technology</button>
+    <button class="news-tab-btn" onclick="loadNews('sports', this)">🏏 Sports</button>
+  </div>
+
+  <!-- Loading State -->
+  <div id="newsLoading" style="text-align:center;padding:60px 20px;color:var(--text-muted);">
+    <div style="font-size:40px;margin-bottom:16px;animation:slowSpin 2s linear infinite;display:inline-block;">☸</div>
+    <p>Loading live news from India...</p>
+  </div>
+
+  <!-- News Grid -->
+  <div class="news-grid" id="newsGrid" style="display:none;">
+    <div class="news-featured" id="featuredNews">
+      <div class="news-featured-img" id="featuredEmoji">🏛️</div>
+      <div class="news-featured-content">
+        <span class="news-tag tag-politics" id="featuredTag">Loading...</span>
+        <h3 id="featuredTitle">Fetching latest news...</h3>
+        <p id="featuredDesc">Please wait while we load the latest Indian news for you.</p>
+        <div class="news-time" id="featuredTime">⏰ Just now</div>
+      </div>
+    </div>
+    <div class="news-list" id="newsList"></div>
+  </div>
+
+  <!-- Error State -->
+  <div id="newsError" style="display:none;text-align:center;padding:40px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:20px;">
+    <div style="font-size:40px;margin-bottom:12px;">📡</div>
+    <h3 style="margin-bottom:8px;">Could not load live news</h3>
+    <p style="color:var(--text-muted);margin-bottom:20px;">This usually happens due to browser security (CORS). Upload to Netlify for live news to work perfectly.</p>
+    <button class="btn btn-primary" onclick="loadNews('india', document.querySelector('.news-tab-btn.active'))">Try Again</button>
+  </div>
+</section>
+
+<div class="tricolor"></div>
+
+<!-- ── SUGGESTION FORM ────────────────────── -->
+<section id="suggest" style="max-width:1200px;">
+  <div class="suggestion-wrap">
+    <div class="suggestion-info">
+      <h2>YOUR<br><span style="color:var(--saffron);">VOICE</span><br>MATTERS</h2>
+      <p>Submit your ideas and suggestions to make India better. From local issues to national policies — every voice counts on Awaaz India.</p>
+      <ul class="feature-list">
+        <li class="feature-item"><span class="feature-dot"></span> Submit suggestions anonymously or with your name</li>
+        <li class="feature-item"><span class="feature-dot"></span> Other citizens can upvote your ideas</li>
+        <li class="feature-item"><span class="feature-dot"></span> Top suggestions get highlighted to authorities</li>
+        <li class="feature-item"><span class="feature-dot"></span> Track status of your submitted suggestions</li>
+      </ul>
+    </div>
+
+    <div class="form-card">
+      <h3>Submit a Suggestion 💡</h3>
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" placeholder="e.g. Rahul Sharma">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>State</label>
+          <select>
+            <option>Select State</option>
+            <option>Maharashtra</option>
+            <option>Karnataka</option>
+            <option>Tamil Nadu</option>
+            <option>Uttar Pradesh</option>
+            <option>Gujarat</option>
+            <option>Delhi</option>
+            <option>West Bengal</option>
+            <option>Rajasthan</option>
+            <option>Kerala</option>
+            <option>Punjab</option>
+            <option>Telangana</option>
+            <option>Andhra Pradesh</option>
+            <option>Bihar</option>
+            <option>Madhya Pradesh</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Category</label>
+          <select>
+            <option>Select Category</option>
+            <option>Education</option>
+            <option>Healthcare</option>
+            <option>Infrastructure</option>
+            <option>Agriculture</option>
+            <option>Employment</option>
+            <option>Environment</option>
+            <option>Women Safety</option>
+            <option>Technology</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Your Suggestion</label>
+        <textarea placeholder="Describe your idea or suggestion to improve India... Be specific about the problem and solution."></textarea>
+      </div>
+      <button class="submit-btn" onclick="submitSuggestion()">🎙️ Submit My Awaaz</button>
+    </div>
+  </div>
+</section>
+
+<div class="tricolor"></div>
+
+<!-- ── TRENDING SUGGESTIONS ───────────────── -->
+<section id="trending">
+  <div class="section-title">TRENDING <span style="color:var(--green-light);">SUGGESTIONS</span></div>
+  <div class="section-sub">Most upvoted ideas by fellow citizens this week</div>
+
+  <div class="suggestions-grid">
+    <div class="suggestion-card">
+      <div class="suggestion-card-header">
+        <h4>Free Wi-Fi in all government schools across rural India</h4>
+        <button class="vote-btn" onclick="vote(this)">
+          <span>▲</span>
+          <span class="vote-count">4.2K</span>
+        </button>
+      </div>
+      <p>Every child deserves digital access. Government should install free broadband in all 1.5 lakh govt schools by 2026.</p>
+      <div class="card-footer">
+        <span class="news-tag tag-social">Education</span>
+        <span>Priya M., Bengaluru</span>
+      </div>
+    </div>
+
+    <div class="suggestion-card">
+      <div class="suggestion-card-header">
+        <h4>Monthly pension of ₹3,000 for all farmers above 60 years</h4>
+        <button class="vote-btn" onclick="vote(this)">
+          <span>▲</span>
+          <span class="vote-count">3.8K</span>
+        </button>
+      </div>
+      <p>Elderly farmers who spent their life feeding the nation deserve financial security in old age without complicated forms.</p>
+      <div class="card-footer">
+        <span class="news-tag tag-economy">Agriculture</span>
+        <span>Ramesh P., Pune</span>
+      </div>
+    </div>
+
+    <div class="suggestion-card">
+      <div class="suggestion-card-header">
+        <h4>Mandatory CCTV in all public transport buses in every state</h4>
+        <button class="vote-btn" onclick="vote(this)">
+          <span>▲</span>
+          <span class="vote-count">3.1K</span>
+        </button>
+      </div>
+      <p>For the safety of women and children, all state-run buses must have working CCTV with live monitoring by police.</p>
+      <div class="card-footer">
+        <span class="news-tag tag-social">Women Safety</span>
+        <span>Anjali K., Delhi</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">
+        <div class="logo-icon">☸</div>
+        <div>
+          <div class="logo-text">Awaaz India</div>
+          <div class="logo-sub">आवाज़ इंडिया</div>
+        </div>
+      </div>
+      <p>India's citizen-powered platform for government suggestions and live national news. Built for 1.4 billion voices.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Platform</h4>
+      <a href="#">Live News</a>
+      <a href="#">Submit Suggestion</a>
+      <a href="#">Trending Ideas</a>
+      <a href="#">State News</a>
+    </div>
+    <div class="footer-col">
+      <h4>Categories</h4>
+      <a href="#">Education</a>
+      <a href="#">Healthcare</a>
+      <a href="#">Agriculture</a>
+      <a href="#">Infrastructure</a>
+    </div>
+    <div class="footer-col">
+      <h4>About</h4>
+      <a href="#">About Us</a>
+      <a href="#">How It Works</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Awaaz India. Made with 🇮🇳 for every Indian.</p>
+    <div class="india-flag">
+      <span style="color:var(--saffron);">●</span>
+      <span style="color:white;">●</span>
+      <span style="color:var(--green-light);">●</span>
+      Jai Hind
+    </div>
+  </div>
+</footer>
+
+<!-- ── AUTH MODAL ─────────────────────────── -->
+<div class="modal-overlay" id="authModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h2 id="modalTitle">JOIN INDIA</h2>
+    <p id="modalSub">Create your free Awaaz India account</p>
+
+    <div class="tab-switch">
+      <button class="tab-btn active" id="signupTab" onclick="switchTab('signup')">Sign Up</button>
+      <button class="tab-btn" id="loginTab" onclick="switchTab('login')">Login</button>
+    </div>
+
+    <div id="authForm">
+      <div id="signupFields">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" placeholder="Rahul Kumar">
+        </div>
+        <div class="form-group">
+          <label>Mobile Number</label>
+          <input type="tel" placeholder="+91 98765 43210">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="you@email.com">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" placeholder="Create a strong password">
+      </div>
+      <button class="submit-btn" onclick="handleAuth()" id="authBtn">🇮🇳 Create My Account</button>
+    </div>
+
+    <div class="success-msg" id="successMsg">
+      <div class="success-icon">🎉</div>
+      <h3>Welcome to Awaaz India!</h3>
+      <p>Your account is ready. Start raising your awaaz today.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── TOAST NOTIFICATION ─────────────────── -->
+<div class="toast" id="toast">✅ Suggestion submitted successfully!</div>
+
+<!-- Your JavaScript file (always at bottom) -->
+<script src="script.js"></script>
+
+</body>
+</html>
